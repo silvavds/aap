@@ -13,6 +13,8 @@ typedef struct {
 	int sp; 
 	int nbMaxElt;
 	T_elt * data;
+	int no_operations;
+	int no_integers;
 } T_stack;
 
 void showStack (const T_stack * p);

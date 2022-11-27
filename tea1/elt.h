@@ -32,6 +32,7 @@
 	#define OPERATOR 'O'
 	#define VALID 'V'
 	#define INVALID 'I'
+	#define RESULT 'R'
 	typedef struct  {
 		int value;
 		char status;
