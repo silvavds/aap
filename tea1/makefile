@@ -2,7 +2,7 @@ PWD=$(shell pwd)
 REP=$(shell basename $(PWD))
 SOURCES=$(shell cat makefile_sources)
 CIBLE=$(REP).exe
-CFLAGS=-Wall
+CFLAGS=-Wall -g
 
 # makefile générique pour produire un code source 
 # dont le nom correspond au nom du répertoire qui le contient

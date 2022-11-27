@@ -2,9 +2,6 @@
 #include "elt.h"
 #include "list.h"
 
-T_list s2list(char * exp);
-T_elt rpn_eval(char * exp);
-
 //#define IMPLEMENTATION_STATIC_CONTIGUOUS
 //#define IMPLEMENTATION_DYNAMIC_CONTIGUOUS
 #define IMPLEMENTATION_DYNAMIC_LINKED
@@ -20,3 +17,8 @@ T_elt rpn_eval(char * exp);
 #ifdef IMPLEMENTATION_DYNAMIC_LINKED
 #include "stack_cld.h"
 #endif
+
+T_list s2list(char * exp);
+T_elt rpn_eval(char * exp);
+int numberOfOperators(T_stack * stack);
+int numberOfNumbers(T_stack * stack);

@@ -5,13 +5,10 @@
 
 #include "stack_cs.h" // type et protypes liés à T_stack
 
-#ifdef IMPLEMENTATION_STATIC_CONTIGUOUS
-
 void showStack (const T_stack * p) {
 	int i; 
 	// Afficher la pile
 	// On affiche en commençant par le sommet de la pile 
-
 	if (p->sp ==0) {
 		printf("Pile vide !\n"); // pile vide ! 
 		return;
@@ -82,7 +79,3 @@ int isEmpty (const T_stack * p) {
 	if (p->sp == 0) return 1; 
 	else return 0;
 }
-
-#endif
-
-

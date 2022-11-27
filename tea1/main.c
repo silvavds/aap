@@ -1,4 +1,9 @@
-#include "rpn.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "list.h"
+#include "elt.h"
+#include "stack_cs.h"
 
 T_elt createElt(char * current){
     T_elt current_elt;
@@ -81,34 +86,11 @@ T_elt rpn_eval(char * exp){
     return retorno;
 }
 
-int numberOfOperators(T_stack * stack){
-    #ifdef IMPLEMENTATION_STATIC_CONTIGUOUS
-    return stack->no_operators;
-    #endif
-
-    #ifdef IMPLEMENTATION_DYNAMIC_CONTIGUOUS
-    return stack->no_operators;
-    #endif
-
-    #ifdef IMPLEMENTATION_DYNAMIC_LINKED
-    // Implementar dps
-    #endif
-}
-
-int numberOfNumbers(T_stack * stack){
-    #ifdef IMPLEMENTATION_STATIC_CONTIGUOUS
-    return (stack->sp)-numberOfOperators(stack);
-    #endif
-
-    #ifdef IMPLEMENTATION_DYNAMIC_CONTIGUOUS
-    return (stack->sp)-numberOfOperators(stack);
-    #endif
-
-    #ifdef IMPLEMENTATION_DYNAMIC_LINKED
-    // Implementar dps
-    #endif
-}
-
-char * stackToString(T_stack * stack){
-
+int main(){
+    //T_list lis = s2list("12 6 + 5 +");
+    //showList(lis);
+    //printf("%s\n",toString(getFirstElt(lis)));
+    T_elt retorno = rpn_eval("5 10 2 /");
+    printf("%s\n",toString(retorno));
+    return 0;
 }

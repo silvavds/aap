@@ -77,7 +77,7 @@ T_elt genElt(void) {
 char * toString(T_elt e) {
 	static char buffer[11]; // nbr max de chiffres nécessaires ? 
 	// 2^31 vaut 2147483648...
-	sprintf(buffer, "%d",e.value); 
+	sprintf(buffer, "%d:%c",e.value,e.status); 
 	return buffer; 
 }
 

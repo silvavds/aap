@@ -5,7 +5,7 @@
 /////////////////////////////////////////////////////////////////////////
 
 //#define IMPLEMENTATION_STATIC_CONTIGUOUS
-#define IMPLEMENTATION_DYNAMIC_CONTIGUOUS
+//#define IMPLEMENTATION_DYNAMIC_CONTIGUOUS
 //#define IMPLEMENTATION_DYNAMIC_LINKED
 
 #ifdef IMPLEMENTATION_DYNAMIC_CONTIGUOUS

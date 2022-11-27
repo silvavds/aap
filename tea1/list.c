@@ -41,12 +41,10 @@ T_node * addNode (T_elt e, T_node * n) {
 void showList(T_list l) {
 	// Afficher la liste en commençant par sa tête 
 	// A faire en itératif 
-
 	if (l==NULL) {
 		printf("Liste Vide !\n");
 		return;
 	}
-
 	while(l != NULL) {
 		printf("%s ", toString(l->data));
 		l = l->pNext; 
