@@ -1,9 +1,7 @@
+#include "rpn.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "list.h"
-#include "elt.h"
-#include "stack_cd.h"
 
 T_elt createElt(char * current){
     T_elt current_elt;
@@ -121,45 +119,4 @@ T_elt rpn_eval(char * exp){
 	}
     T_elt retorno = rpn_calculate(&pilha);
     return retorno;
-}
-
-int main(){
-    //T_list lis = s2list("12 6 + 5 +");
-    //showList(lis);
-    //printf("%s\n",toString(getFirstElt(lis)));
-    T_elt retorno = rpn_eval("2 2 2 + +");
-    T_stack eval_pilha = newStack(20);
-    
-    T_elt t1 = genElt();
-    t1.status=RESULT;
-    t1.value=125;
-
-    T_elt t2 = genElt();
-    t2.status=RESULT;
-    t2.value=25;
-
-    T_elt t3 = genElt();
-    t3.status=RESULT;
-    t3.value=5;
-
-    T_elt t4 = genElt();
-    t4.status=OPERATOR;
-    t4.value='/';
-
-    T_elt t5 = genElt();
-    t5.status=OPERATOR;
-    t5.value='/';
-
-    push(t1,&eval_pilha);
-    push(t2,&eval_pilha);
-    push(t3,&eval_pilha);
-    push(t4,&eval_pilha);
-    push(t5,&eval_pilha);
-
-    //showStack(&eval_pilha);
-    T_elt retorno2 = rpn_eval_stack(&eval_pilha);
-
-    printf("%s\n",toString(retorno));
-    printf("%s\n",toString(retorno2));
-    return 0;
 }
