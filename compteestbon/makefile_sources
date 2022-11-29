@@ -1,1 +1,1 @@
-main.c elt.c list.c stack_cd.c rpn.c search.c
+main.c elt.c rpn.c list.c stack_cd.c stack_cs.c stack_cld.c search.c

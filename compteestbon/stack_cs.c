@@ -3,9 +3,14 @@
 //#define CLEAR2CONTINUE
 #include "../include/traces.h" 
 
-#include "stack_cs.h" // type et protypes liés à T_stack
+#include "rpn.h"
+//#include "stack_cs.h" // type et protypes liés à T_stack
+
+
+#ifdef  IMPLEMENTATION_STATIC_CONTIGUOUS
 
 void showStack (const T_stack * p) {
+	//printf("showStack \n");
 	int i; 
 	// Afficher la pile
 	// On affiche en commençant par le sommet de la pile 
@@ -21,11 +26,13 @@ void showStack (const T_stack * p) {
 }
 
 void emptyStack (T_stack *p) {
+	//printf("emptyStack \n");
 	// Vider la pile 
 	p->sp = 0; 
 }
 
-T_stack newStack(void) {
+T_stack newStack(int size) {
+	//printf("newStack \n");
 	// Créer une pile vide
 	T_stack s = {0}; 
 	return s; 
@@ -34,13 +41,14 @@ T_stack newStack(void) {
 // Nouvelles fonctions à réaliser pour l'exercice 3
 
 T_stack exampleStack(int n) {
+	//printf("exampleStack \n");
 	// Renvoie une nouvelle pile d'exemple, contenant n éléments
 	int i; 
 	T_stack s;
 
 	assert(n<=STACK_NBMAX_ELT); 
 
-	s = newStack();  
+	s = newStack(STACK_NBMAX_ELT);  
 	for(i=0;i<n;i++) {
 		push(genElt(),&s); 
 	}
@@ -49,6 +57,7 @@ T_stack exampleStack(int n) {
 }
 
 T_elt pop(T_stack *p) {
+	//printf("pop \n");
 	// Cette opération extrait de la pile, l’élément au sommet, 
 	// modifiant ainsi son état
 	assert(p != NULL); 
@@ -59,6 +68,7 @@ T_elt pop(T_stack *p) {
 }
 
 T_elt top(const T_stack *p) {
+	printf("top \n");
 	// Cette opération permet d’accéder à l’élément en sommet de pile
 	assert(p != NULL);
 	assert(p->sp > 0);
@@ -66,6 +76,7 @@ T_elt top(const T_stack *p) {
 }
 
 void push(T_elt e, T_stack *p) {
+	//printf("push \n");
 	// Opération consistant à empiler un élément e
 	// sur la pile modifiant ainsi son état
 	assert(p!=NULL); 
@@ -73,9 +84,12 @@ void push(T_elt e, T_stack *p) {
 }
 
 int isEmpty (const T_stack * p) {
+	//printf("is Empty \n");
 	// Cette opération permet de tester si la pile est vide
 
 	assert(p!=NULL);
 	if (p->sp == 0) return 1; 
 	else return 0;
 }
+
+#endif

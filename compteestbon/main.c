@@ -14,7 +14,7 @@ int main(int argc, char * argv[]) {
 		
 	T_elt plus  = {'+','O'};
 	T_elt minus = {'-','O'};
-	T_elt times = {'*','O'};
+	T_elt times = {'x','O'};
 	T_elt div   = {'/','O'};
 	push(plus, &num); push(minus, &num); push(times, &num); push(div, &num); 
 

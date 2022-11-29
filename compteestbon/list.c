@@ -23,7 +23,7 @@ static T_node * newNode(T_elt e) {
 	CHECK_IF(pNode = malloc(sizeof(T_node)), NULL, "malloc allocateNode"); 
 	pNode->data = e; 
 	pNode->pNext = NULL;
-
+	
 	return pNode;
 }
 

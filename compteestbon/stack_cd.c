@@ -1,15 +1,14 @@
 #include <assert.h> // assert
-
 //#define DEBUG
 #include "../include/check.h" 
 
 //#define CLEAR2CONTINUE
 #include "../include/traces.h" 
-
-#include "stack_cd.h" // type et protypes liés à T_stack
+#include "rpn.h"
+//#include "stack_cd.h" // type et protypes liés à T_stack
 
 #ifdef IMPLEMENTATION_DYNAMIC_CONTIGUOUS
-#define STACK_THRESHOLD 1024
+#define STACK_THRESHOLD 15
 
 /*
 typedef struct {

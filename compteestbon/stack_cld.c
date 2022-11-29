@@ -6,13 +6,13 @@
 //#define CLEAR2CONTINUE
 #include "../include/traces.h" 
 
-#include "stack_cld.h" // type et protypes liés à T_stack
+#include "rpn.h"
+//#include "stack_cld.h" // type et protypes liés à T_stack
 
 // typedef T_node * T_stack;
 
 #ifdef IMPLEMENTATION_DYNAMIC_LINKED
-
-T_stack newStack() {
+T_stack newStack(int size) {
 	// Créer une pile vide
 
 	return NULL; 
@@ -27,8 +27,9 @@ void freeStack (T_stack *p) {
 void push(T_elt e, T_stack *p) {
 	// Opération consistant à empiler un élément e
 	// sur la pile modifiant ainsi son état
-
+	
 	*p = addNode(e, *p);
+	
 }
 
 void showStack (const T_stack * p) {
@@ -65,7 +66,6 @@ int isEmpty (const T_stack * p) {
 
 	return ((*p)==NULL); 
 }
-
 #endif
 
 

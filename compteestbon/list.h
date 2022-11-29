@@ -6,6 +6,7 @@
 typedef struct node {
 	T_elt data;
 	struct node *pNext;
+	
 } T_node, * T_list;
 
 T_node * addNode (T_elt e, T_node * n);

@@ -5,6 +5,7 @@
 
 // C'est dans le fichier elt.h qu'on doit choisir l'implémentation des T_elt
 #include "search.h"
+#include "elt.h"
 
 void put_botton(T_stack *list1, T_elt element){
 	int i, tam = list1->sp;
@@ -13,8 +14,11 @@ void put_botton(T_stack *list1, T_elt element){
 	for(i = 0 ; i < tam ; i++)push(pop(list1), &list2);
 	push(element, list1);
 	for(i = 0 ; i < tam ; i++)push(pop(&list2), list1);
-	
+
+
+	#ifdef IMPLEMENTATION_DYNAMIC_CONTIGUOUS	
 	freeStack(&list2);
+	#endif
 }
 
 int is_valid(T_stack * exp){ //RPN_eval_stack
@@ -97,7 +101,7 @@ T_elt compute(T_stack exp_){
 				else result.status = 'I';
 			break;
 			
-			case '*':
+			case 'x':
 				result.value = num2.value * num1.value;
 				result.status = 'V';
 
@@ -121,9 +125,10 @@ T_elt compute(T_stack exp_){
 		}
 		
 	}
-	
+	#ifdef IMPLEMENTATION_DYNAMIC_CONTIGUOUS	
 	freeStack(&exp2);
 	freeStack(&exp);
+	#endif
 	result.status = 'R';	
 	return result;
 	
@@ -170,10 +175,14 @@ T_stack search(T_stack * exp, T_stack * num, int target, T_stack * best){
 	}
 	int aux = is_valid(exp);
 	//int aux = 1;
-	if(aux == 1){		
+	if(aux == 1){	
+		//show2lists(exp, num, 0);		
 		T_elt res = compute(*exp);
+				
 		T_elt res_old = compute(*best);
 		if(res.status == 'R'){
+			//show2lists(exp, num, res.value);
+		
 			if( abs(res.value - target) <= abs(res_old.value - target)){
 				if( abs(res.value - target) == abs(res_old.value - target)){			
 					if( best->sp > exp->sp ){
@@ -219,7 +228,7 @@ void show_operations(T_stack * list1, int res){
             if(current=='-'){
                 res_inter = t2-t1;
             }
-            if(current=='*'){
+            if(current=='x'){
                 res_inter = t2*t1;
             }
             if(current=='/'){
