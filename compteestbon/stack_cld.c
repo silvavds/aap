@@ -10,6 +10,8 @@
 
 // typedef T_node * T_stack;
 
+#ifdef IMPLEMENTATION_DYNAMIC_LINKED
+
 T_stack newStack() {
 	// Créer une pile vide
 
@@ -63,3 +65,7 @@ int isEmpty (const T_stack * p) {
 
 	return ((*p)==NULL); 
 }
+
+#endif
+
+

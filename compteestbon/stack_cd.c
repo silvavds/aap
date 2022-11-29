@@ -8,7 +8,8 @@
 
 #include "stack_cd.h" // type et protypes liés à T_stack
 
-#define STACK_THRESHOLD 5
+#ifdef IMPLEMENTATION_DYNAMIC_CONTIGUOUS
+#define STACK_THRESHOLD 1024
 
 /*
 typedef struct {
@@ -112,3 +113,7 @@ int isEmpty (const T_stack * p) {
 	else return 0;
 	
 }
+
+#endif
+
+

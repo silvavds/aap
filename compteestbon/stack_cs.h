@@ -1,6 +1,6 @@
 #include "elt.h"
 
-#define STACK_NBMAX_ELT 20
+#define STACK_NBMAX_ELT 10
 
 /////////////////////////////////////////////////////////////////////////
 // CHOISIR ICI L'IMPLEMENTATION DES PILES 

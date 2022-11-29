@@ -1,1 +1,1 @@
-main.c elt.c stack_cd.c
+main.c elt.c stack_cd.c stack_cs.c stack_cld.c
