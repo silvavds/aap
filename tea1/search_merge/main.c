@@ -222,18 +222,18 @@ int main(int argc, char ** argv) {
 	T_elt minus = {'-','O'};
 	T_elt times = {'*','O'};
 	T_elt div   = {'/','O'};
-	T_elt one   = {  8,'V'};
-	T_elt two   = {  3,'V'};
-	T_elt three = {  10,'V'};
-	T_elt four  = {  7,'V'};
-	T_elt five  = { 4,'V'};
-	T_elt six   = { 2,'V'};
+	T_elt one   = {  2,'V'};
+	T_elt two   = {  2,'V'};
+	T_elt three = {  3,'V'};
+	T_elt four  = {  4,'V'};
+	T_elt five  = {  6,'V'};
+	T_elt six   = { 10,'V'};
 	
 	//push(plus, &num); push(three, &num); push(two, &num); push(one, &num);
 	push(plus, &num); push(minus, &num); push(times, &num); push(div, &num); 
 	push(six, &num); push(five, &num); push(four, &num); push(three, &num); push(two, &num); push(one, &num);
 	
-	best = search(&exp, &num, 219, p_best);
+	best = search(&exp, &num, 631, p_best);
 	show1list(&best, compute(best).value);
 	
 	return 0;
