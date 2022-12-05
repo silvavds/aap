@@ -1,0 +1,30 @@
+digraph liste { 
+graph [ 
+	rankdir = "LR" 
+] 
+
+node [ 
+	fontname = "Arial bold"
+	fontsize = "14" 
+	fontcolor = "red" 
+	style = "rounded, filled" 
+	shape = "record" 
+	fillcolor = "grey90" 
+	color = "blue" 
+	width = "2" 
+] 
+
+edge [ 
+	color = "blue" 
+] 
+
+
+ 
+"ID_0001" [label = "{ 11 | <next> }"]; 
+"ID_0001" : next -> "ID_0002" ; 
+"ID_0002" [label = "{ 151 | <next> }"]; 
+"ID_0002" : next -> "ID_0003" ; 
+"ID_0003" [label = "{ 31 | <next> }"]; 
+"ID_0003" : next -> "ID_0004" ; 
+"ID_0004" [label = "{ 99 | <next> NULL}"]; 
+}
