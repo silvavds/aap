@@ -1,0 +1,11 @@
+digraph move_down {
+	node [fontname="Arial", shape="circle", width=0.5]; 
+
+	0 [label = "[ ] (125922)"];
+	0:sw -> 1;
+	1 [label = "207 (128964)"];
+	1:sw -> 3;
+	3 [label = "208 (143918)"];
+	0:se -> 2;
+	2 [label = "209 (164887)"];
+}

@@ -1,0 +1,4 @@
+digraph move_down {
+	node [fontname="Arial", shape="circle", width=0.5]; 
+
+}

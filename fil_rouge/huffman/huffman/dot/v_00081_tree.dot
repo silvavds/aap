@@ -1,0 +1,24 @@
+digraph tree {
+	node [fontname="Arial", shape="circle", width=0.5]; 
+
+209:sw -> 203 [label = " 0"]; 
+203 [label = "203"]; 
+203:sw -> 105 [label = " 0"]; 
+105 [label = "[i] (38169) "]; 
+203:se -> 110 [label = " 1"]; 
+110 [label = "[n] (40361) "]; 
+209:se -> 204 [label = " 1"]; 
+204 [label = "204"]; 
+204:sw -> 111 [label = " 0"]; 
+111 [label = "[o] (43115) "]; 
+204:se -> 197 [label = " 1"]; 
+197 [label = "197"]; 
+197:se -> 108 [label = " 1"]; 
+108 [label = "[l] (22579) "]; 
+197:sw -> 190 [label = " 0"]; 
+190 [label = "190"]; 
+190:sw -> 44 [label = " 0"]; 
+44 [label = "[,] (9994) "]; 
+190:se -> 103 [label = " 1"]; 
+103 [label = "[g] (10669) "]; 
+}

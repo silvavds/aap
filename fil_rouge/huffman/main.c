@@ -3,11 +3,12 @@
 #include <string.h>
 
 #include "huffman.h"
+#include "visuals.h"
 
 // important discussion on how different hufmann codes can be equally efficient
 // https://stackoverflow.com/questions/16873886/variations-in-huffman-encoding-codewords
 	
-
+#define PRINT_HUFFMAN 1
 
 // counts the frequency of each char
 int frequency_count( t_ind_heap * heap, char * str){
@@ -45,7 +46,8 @@ int main(int argc, char ** argv){
 	//char str[] = "this is an example of a huffman tree";
 	//char str[] = "streets are stone stars are not";
 	
-	printf("argc: [%d] \n", argc);
+	/* read from input */
+	//printf("argc: [%d] \n", argc);
 	
 	char * str = NULL;
 	
@@ -61,9 +63,13 @@ int main(int argc, char ** argv){
 	int total_normal = frequency_count(&heap, str);
 
 	//print_heap_tree(heap);
+	//createDotPOT(heap.tree, heap.nb_elt, "heap_vis"); 
+	
 	make_minimier(&heap);
 	//print_heap_tree(heap);
 	
+	//createDotPOT(heap.tree, heap.nb_elt, "heap_vis", heap.data); 
+		
 	while ( heap.nb_elt > 1 ){
 		// extract the root
 		int x = extract_root( &heap );
@@ -71,7 +77,10 @@ int main(int argc, char ** argv){
 		insert_internal( &heap, heap.data[x]+heap.data[y] );
 		
 		huffman[x] = -1*(heap.internal+127);	
-		huffman[y] = +1*(heap.internal+127);			
+		huffman[y] = +1*(heap.internal+127);	
+		#if(PRINT_HUFFMAN == 1)		
+		print_huffman(heap, huffman, (heap.internal+127), heap.data);
+		#endif
 	}
 	
 	// make table encoding
@@ -93,6 +102,8 @@ int main(int argc, char ** argv){
 		}
 	}
 	
+	print_huffman(heap, huffman, (heap.internal+127), heap.data);
+		
 }
 
 char * read_from_file(){

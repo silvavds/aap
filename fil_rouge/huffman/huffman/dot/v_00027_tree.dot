@@ -1,0 +1,28 @@
+digraph tree {
+	node [fontname="Arial", shape="circle", width=0.5]; 
+
+155:sw -> 82 [label = " 0"]; 
+82 [label = "[R] (249) "]; 
+155:se -> 150 [label = " 1"]; 
+150 [label = "150"]; 
+150:sw -> 144 [label = " 0"]; 
+144 [label = "144"]; 
+144:sw -> 57 [label = " 0"]; 
+57 [label = "[9] (60) "]; 
+144:se -> 139 [label = " 1"]; 
+139 [label = "139"]; 
+139:sw -> 48 [label = " 0"]; 
+48 [label = "[0] (30) "]; 
+139:se -> 53 [label = " 1"]; 
+53 [label = "[5] (32) "]; 
+150:se -> 145 [label = " 1"]; 
+145 [label = "145"]; 
+145:se -> 56 [label = " 1"]; 
+56 [label = "[8] (67) "]; 
+145:sw -> 140 [label = " 0"]; 
+140 [label = "140"]; 
+140:se -> 42 [label = " 1"]; 
+42 [label = "[*] (34) "]; 
+140:sw -> 54 [label = " 0"]; 
+54 [label = "[6] (33) "]; 
+}

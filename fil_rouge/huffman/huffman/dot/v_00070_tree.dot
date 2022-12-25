@@ -1,0 +1,48 @@
+digraph tree {
+	node [fontname="Arial", shape="circle", width=0.5]; 
+
+198:sw -> 100 [label = " 0"]; 
+100 [label = "[d] (23091) "]; 
+198:se -> 191 [label = " 1"]; 
+191 [label = "191"]; 
+191:se -> 119 [label = " 1"]; 
+119 [label = "[w] (12342) "]; 
+191:sw -> 186 [label = " 0"]; 
+186 [label = "186"]; 
+186:se -> 118 [label = " 1"]; 
+118 [label = "[v] (6045) "]; 
+186:sw -> 182 [label = " 0"]; 
+182 [label = "182"]; 
+182:se -> 73 [label = " 1"]; 
+73 [label = "[I] (3028) "]; 
+182:sw -> 176 [label = " 0"]; 
+176 [label = "176"]; 
+176:sw -> 45 [label = " 0"]; 
+45 [label = "[-] (1434) "]; 
+176:se -> 167 [label = " 1"]; 
+167 [label = "167"]; 
+167:sw -> 65 [label = " 0"]; 
+65 [label = "[A] (690) "]; 
+167:se -> 159 [label = " 1"]; 
+159 [label = "159"]; 
+159:sw -> 89 [label = " 0"]; 
+89 [label = "[Y] (372) "]; 
+159:se -> 152 [label = " 1"]; 
+152 [label = "152"]; 
+152:se -> 91 [label = " 1"]; 
+91 [label = "[[] (198) "]; 
+152:sw -> 147 [label = " 0"]; 
+147 [label = "147"]; 
+147:sw -> 85 [label = " 0"]; 
+85 [label = "[U] (85) "]; 
+147:se -> 141 [label = " 1"]; 
+141 [label = "141"]; 
+141:se -> 51 [label = " 1"]; 
+51 [label = "[3] (48) "]; 
+141:sw -> 137 [label = " 0"]; 
+137 [label = "137"]; 
+137:sw -> 34 [label = " 0"]; 
+34 [label = "34"]; 
+137:se -> 55 [label = " 1"]; 
+55 [label = "[7] (25) "]; 
+}

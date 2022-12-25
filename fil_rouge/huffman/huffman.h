@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #ifndef __HUFFMAN__
 
 #define __HUFFMAN__
@@ -49,5 +51,9 @@ void make_minimier( t_ind_heap * heap );
 void insert_internal( t_ind_heap * tas, int value);
 
 int look_for ( t_ind_heap tas , int huffman[], int target, t_trace trace, int * encoding);
+
+void print_huffman ( t_ind_heap tas , int huffman[], int target, int data[]);
+
+void print_huffman_rec ( t_ind_heap tas , int huffman[], int target, FILE * fp, int data[]);
 
 #endif
