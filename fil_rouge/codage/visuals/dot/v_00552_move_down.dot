@@ -1,0 +1,27 @@
+digraph move_down {
+	node [fontname="Arial", shape="circle", width=0.5]; 
+
+	0 [label = "[h] (238)"];
+	0:sw -> 1;
+	1 [label = "165 (251)"];
+	1:sw -> 3;
+	3 [label = "[a] (259)"];
+	3:sw -> 7;
+	7 [label = "169 (391)"];
+	3:se -> 8;
+	8 [label = "168 (337)"];
+	1:se -> 4;
+	4 [label = "[o] (263)"];
+	4:sw -> 9;
+	9 [label = "[e] (414)"];
+	4:se -> 10;
+	10 [label = "[ ] (777)"];
+	0:se -> 2;
+	2 [label = "170 (450)"];
+	2:sw -> 5;
+	5 [label = "166 (265)"];
+	5:sw -> 11;
+	11 [label = "167 (298)"];
+	2:se -> 6;
+	6 [label = "[t] (319)"];
+}

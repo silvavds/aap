@@ -1,8 +1,0 @@
-digraph tree {
-	node [fontname="Arial", shape="circle", width=0.5]; 
-
-142:sw -> 40 [label = " 0"]; 
-40 [label = "[(] (48) "]; 
-142:se -> 41 [label = " 1"]; 
-41 [label = "[)] (48) "]; 
-}
