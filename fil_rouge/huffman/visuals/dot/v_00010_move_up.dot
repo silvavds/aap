@@ -1,0 +1,9 @@
+digraph move_up {
+	node [fontname="Arial", shape="circle", width=0.5]; 
+
+	0 [label = "[B] (2)"];
+	0:sw -> 1;
+	1 [label = "128 (3)"];
+	0:se -> 2;
+	2 [label = "129 (4)"];
+}
