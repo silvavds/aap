@@ -1,9 +1,0 @@
-digraph move_down {
-	node [fontname="Arial", shape="circle", width=0.5]; 
-
-	0 [label = "128 (2)"];
-	0:sw -> 1;
-	1 [label = "[A] (5)"];
-	0:se -> 2;
-	2 [label = "[R] (2)"];
-}

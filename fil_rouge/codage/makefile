@@ -1,7 +1,7 @@
 all : output
 
 output : main.o huffman.o visuals.o
-	gcc main.o huffman.o visuals.o -o output 
+	gcc main.o huffman.o visuals.o -o codage
 	
 main.o : main.c
 	gcc -c main.c -o main.o 

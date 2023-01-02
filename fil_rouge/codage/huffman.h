@@ -7,7 +7,8 @@
 #define MAX_NUM 20		// ? 
 #define MAX_CHARS 128		// max number of characters for encoding
 #define MAX_CODE_LEN 50		// max len of a huffman code	
-#define INIT_SIZE 100		
+#define INIT_SIZE 100	
+#define VERBOSE 1	
 
 #define is_in_tree(i, n)	(i < n)		// computes if element makes part of tree
 #define i_parent(i)		(i - 1)/2	// returns index of parent of element i
