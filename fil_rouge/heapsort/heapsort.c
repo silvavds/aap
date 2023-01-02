@@ -104,7 +104,7 @@ void runTimeTests(){
 }
 
 int main(void) {
-	heapSortTest();
+	quickSortTest();
 
 	// int ex1[] = { 18, 15, 11, 10, 15, 6, 1, 7, 4, 9};   // 10
 	// int ex2[] = { 18, 16, 11, 10, 15, 6, 1, 7, 4, 9, 3}; // 11
@@ -367,7 +367,7 @@ T_elt * quickSort(T_elt * number,int first,int last){
 	stats.nbComparisons++;
 	if(first<last){
 		stats.nbOperations++;
-		pivot=first;
+		pivot=((rand() % (last - first + 1)) + first);
 		i=first;
 		j=last;
 

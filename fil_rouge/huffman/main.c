@@ -8,6 +8,7 @@
 	
 #define PRINT_HUFFMAN 0
 #define MAX_FILE_SIZE 50000000
+#define VERBOSE 0
 
 // counts the frequency of each char
 int frequency_count( t_ind_heap * heap, char * str){
@@ -91,13 +92,17 @@ charFreq * print_table_from_num_of_bits(charFreq * caracteres, char* final_resul
 	int * numenc;	
 	table_from_num_of_bits(caracteres,numenc);
 	int numofencoding = *numenc;
-	printf("\n%d\n",numofencoding);
+	if(VERBOSE){
+		printf("\n%d\n",numofencoding);
+	}
 	sprintf(final_result,"%d\n",numofencoding);
 	for(int i=0;i<MAX_CHARS;i++){
 	 	if(caracteres[i].numofbits!=0){
 	 		//printf("%d\n",caracteres[i].caractere);
 			//printf("%c", caracteres[i].numofbits+32);
-			printf("%c%c", caracteres[i].caractere,caracteres[i].numofbits+32);
+			if(VERBOSE){
+				printf("%c%c", caracteres[i].caractere,caracteres[i].numofbits+32);
+			}
 			sprintf(final_result+strlen(final_result),"%c%c", caracteres[i].caractere,caracteres[i].numofbits+32);
 	 	}
 	}
@@ -136,9 +141,11 @@ void compress(char * str, FILE *fp){
 	
 	int total = look_for( heap, huffman, heap.tree[0], trace, p_encoding);
 	
-	printf("total normal: %d \n", total_normal);	
-	printf("total compressed: %d \n", total);
-	printf("ratio: %5.2f %% \n", 100*(total/(double)total_normal));
+	if(VERBOSE){
+		printf("total normal: %d \n", total_normal);	
+		printf("total compressed: %d \n", total);
+		printf("ratio: %5.2f %% \n", 100*(total/(double)total_normal));	
+	}
 
 	charFreq caracteres[MAX_CHARS];
 	
@@ -167,7 +174,9 @@ void compress(char * str, FILE *fp){
 			}
 		}
 	}
-	printf("\n\n");
+	if(VERBOSE){
+		printf("\n\n");
+	}
 	print_huffman(heap, huffman, (heap.internal+127), heap.data);
 
 	fputs(final_result,fp);
@@ -219,21 +228,33 @@ void decompress(char * str){
 			stage=2;
 		}else if(stage==2){ //Decoding
 			char * current_string = (char*)calloc(MAX_CODE_LEN,sizeof(char));
+			int not_found=0;
 			while(ch!=EOF){
 				sprintf(current_string+strlen(current_string),"%c",ch);
 				str_cnt++;
 				ch = str[str_cnt];
+				int has_found = 0;
 				for(i=0;i<MAX_CHARS;i++){
 					if(newChar[i].bincode!=NULL){
 						if(strcmp(newChar[i].bincode,current_string)==0){
 							printf("%c",newChar[i].caractere);
 							sprintf(current_string,"%c",'\0');
+							has_found=1;
 						}
 						if(strlen(current_string)==(MAX_CODE_LEN-1)){
 							i=MAX_CHARS;
 							ch=EOF;
 						}
 					}
+				}
+				if(!has_found){
+					not_found++;
+				}else{
+					not_found=0;
+				}
+				if(not_found>=MAX_CODE_LEN){
+					i=MAX_CHARS;
+					ch=EOF;
 				}
 			}
 		}
@@ -252,9 +273,10 @@ int main(int argc, char ** argv){
 			// If it is EOF stop reading.
 		} while (ch != EOF);
 		input[strlen(input)-1]='\0';
-		printf("String read: %s\n", input);
+		if(VERBOSE){
+			printf("String read: %s\n", input);
+		}
 		fclose(fp1);
-
 
 		FILE *fp2 = fopen(argv[2], "w");
 		compress(input,fp2);
