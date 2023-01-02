@@ -8,7 +8,7 @@
 // important discussion on how different hufmann codes can be equally efficient
 // https://stackoverflow.com/questions/16873886/variations-in-huffman-encoding-codewords
 	
-#define PRINT_HUFFMAN 1
+#define PRINT_HUFFMAN 0
 
 // counts the frequency of each char
 int frequency_count( t_ind_heap * heap, char * str){
