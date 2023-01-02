@@ -5,12 +5,9 @@
 
 #include "huffman.h"
 #include "visuals.h"
-
-// important discussion on how different hufmann codes can be equally efficient
-// https://stackoverflow.com/questions/16873886/variations-in-huffman-encoding-codewords
 	
-#define PRINT_HUFFMAN 1
-#define MAX_FILE_SIZE 500000
+#define PRINT_HUFFMAN 0
+#define MAX_FILE_SIZE 50000000
 
 // counts the frequency of each char
 int frequency_count( t_ind_heap * heap, char * str){
@@ -165,7 +162,7 @@ void compress(char * str, FILE *fp){
 		currentC = str[i];
 		for(j=0;j<MAX_CHARS;j++){
 			if(newChar[j].caractere==currentC){
-				printf("%s",newChar[j].bincode);
+				//printf("%s",newChar[j].bincode);
 				sprintf(final_result+strlen(final_result),"%s",newChar[j].bincode);
 			}
 		}
@@ -217,11 +214,6 @@ void decompress(char * str){
 				caracteres[current_c].numofbits = current_count;
 			}
 			newChar = table_from_num_of_bits(&caracteres[0],&num_enc);
-			for(i = 0 ; i < MAX_CHARS ; i++){
-				if(newChar[i].numofbits!=0){
-					printf("%c %s\n",newChar[i].caractere,newChar[i].bincode);
-				}
-			}
 			str_cnt += num_enc*2;
 			ch = str[str_cnt];
 			stage=2;
@@ -269,7 +261,7 @@ int main(int argc, char ** argv){
 		fclose(fp2);
 		//compress(argv[1]);
 	}else if(argc==2){
-		printf("Decompress\n");
+		//printf("Decompress\n");
 		FILE *fp = fopen(argv[1], "r");
 		char* input = (char*)calloc(MAX_FILE_SIZE,sizeof(char));
 		char ch;
@@ -280,7 +272,7 @@ int main(int argc, char ** argv){
 			// If it is EOF stop reading.
 		} while (ch != EOF);
 		input[strlen(input)-1]='\0';
-		printf("String read: %s\n", input);
+		//printf("String read: %s\n", input);
 		fclose(fp);
 		decompress(input);
 	}

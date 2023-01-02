@@ -8,7 +8,7 @@
 #include <sys/stat.h>
 #include <math.h> 
 
-#define PRINT_TREE 1
+#define PRINT_TREE 0
 
 // simply inserts an element in the first available position in the heap
 void naive_insert( t_ind_heap * heap , char value ){

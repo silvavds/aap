@@ -37,6 +37,8 @@ typedef struct {
 #define MAXIMIER_TAS
 #endif
 
+#define MAX_ELT 30000
+
 T_heap * newHeap(unsigned int nbMaxElt);
 void freeHeap(T_heap *p); 
 T_heap * initHeap(T_elt t[], int n) ;
@@ -57,6 +59,10 @@ T_elt * heapSort(T_elt * d, int n);
 T_elt * quickSort(T_elt * number,int first,int last);
 void merge(T_elt * arr, int l, int m, int r);
 T_elt * mergeSort(T_elt * arr, int l, int r);
+
+void quickSortTest();
+void mergeSortTest();
+void heapSortTest();
  
 void runTimeTests(){
 	printf("n,heap,quick,merge\n");
@@ -98,7 +104,7 @@ void runTimeTests(){
 }
 
 int main(void) {
-	runTimeTests();
+	heapSortTest();
 
 	// int ex1[] = { 18, 15, 11, 10, 15, 6, 1, 7, 4, 9};   // 10
 	// int ex2[] = { 18, 16, 11, 10, 15, 6, 1, 7, 4, 9, 3}; // 11
@@ -192,35 +198,46 @@ T_heap * initHeap(T_elt t[], int n) {
 
 void swap(T_heap *p, int i, int j) {
     T_elt pAux;
+	stats.nbOperations+=3;
     pAux = p->tree[i];
     p->tree[i] = p->tree[j];
     p->tree[j] = pAux;
 }
 
 void siftUp(T_heap *p, int k) {
+	stats.nbOperations++;
     int i = iPARENT(k);
+	stats.nbComparisons++;
 	if(i<0){
 		return;
 	}
 	#ifdef MAXIMIER_TAS
     while(p->tree[i]<p->tree[k]){
+		stats.nbComparisons++;
 		swap(p,i,k);
+		stats.nbOperations+=2;
 		k=i;
 		i = iPARENT(i);
+		stats.nbComparisons++;
 		if(i<0){
 			return;
 		}
 	}	
+	stats.nbComparisons++;
 	#endif
 	#ifdef MINIMIER_TAS
     while(p->tree[i]>p->tree[k]){
+		stats.nbComparisons++;
 		swap(p,i,k);
+		stats.nbOperations+=2;
 		k=i;
 		i = iPARENT(i);
+		stats.nbComparisons++;
 		if(i<0){
 			return;
 		}
 	}	
+	stats.nbComparisons++;
 	#endif
 }
 
@@ -233,11 +250,13 @@ void addElt(T_heap *p, T_elt e) {
 void buildHeapV1(T_heap * p){
 	#ifdef MAXIMIER_TAS
 	for(int i=1;i<p->nbElt;i++){
+		stats.nbComparisons++;
 		siftUp(p,i);
 	}
 	#endif
 	#ifdef MINIMIER_TAS
 	for(int i=(p->nbElt-1);i>=0;i--){
+		stats.nbComparisons++;
 		siftUp(p,i);
 	}
 	#endif
@@ -247,37 +266,53 @@ void siftDown(T_heap *p, int k) {
 	int i;
 	#ifdef MAXIMIER_TAS
 	while(k<p->nbElt){
+		stats.nbComparisons++;
+		stats.nbOperations++;
 		i = iLCHILD(k);
+		stats.nbComparisons++;
 		if(p->tree[iRCHILD(k)]>p->tree[i]){
+			stats.nbOperations++;
 			i = iRCHILD(k);
 		}
+		stats.nbComparisons++;
 		if(i>=p->nbElt){
 			return;
 		}
+		stats.nbComparisons++;
 		if(p->tree[k]>=p->tree[i]){
 			return;
 		}else{
 			swap(p,i,k);
+			stats.nbOperations++;
 			k=i;
 		}
 	}
+	stats.nbComparisons++;
 	#endif
 	#ifdef MINIMIER_TAS
 	while(k<p->nbElt){
+		stats.nbComparisons++;
 		i = iLCHILD(k);
+		
+		stats.nbComparisons++;
 		if(p->tree[iRCHILD(k)]<p->tree[i]&&iRCHILD(k)<p->nbElt){
+			stats.nbOperations++;
 			i = iRCHILD(k);
 		}
+		stats.nbComparisons++;
 		if(i>=p->nbElt){
 			return;
 		}
+		stats.nbComparisons++;
 		if(p->tree[k]<=p->tree[i]){
 			return;
 		}else{
 			swap(p,i,k);
+			stats.nbOperations++;
 			k=i;
 		}
 	}
+	stats.nbComparisons++;
 	#endif
 }
 
@@ -292,6 +327,7 @@ T_elt removeMax(T_heap *p) {
 	T_elt aux; 
 	aux = getMax(p);
     swap(p,0,p->nbElt-1);
+	stats.nbOperations++;
 	p->nbElt--;
 	buildHeapV1(p);
 	return aux; 
@@ -301,11 +337,13 @@ T_elt removeMax(T_heap *p) {
 void buildHeapV2(T_heap * p){
 	#ifdef MAXIMIER_TAS
 	for(int i=floor(p->nbElt/2)-1;i>=0;i--){
+		stats.nbComparisons++;
 		siftDown(p,i);
 	}
 	#endif
 	#ifdef MINIMIER_TAS
 	for(int i=floor(p->nbElt/2)-1;i>=0;i--){
+		stats.nbComparisons++;
 		siftDown(p,i);
 	}
 	#endif
@@ -326,23 +364,40 @@ T_elt * heapSort(T_elt * d, int n){
 
 T_elt * quickSort(T_elt * number,int first,int last){
 	int i, j, pivot, temp;
+	stats.nbComparisons++;
 	if(first<last){
+		stats.nbOperations++;
 		pivot=first;
 		i=first;
 		j=last;
+
 		while(i<j){
+			stats.nbComparisons++;
+			
 			while(number[i]<=number[pivot]&&i<last){
+				stats.nbOperations++;
 				i++;
+				stats.nbComparisons++;
 			}
+			stats.nbComparisons++;
+			
+			stats.nbComparisons++;
 			while(number[j]>number[pivot]){
+				stats.nbOperations++;
 				j--;
+				stats.nbComparisons++;
 			}
+
+			stats.nbComparisons++;
 			if(i<j){
+				stats.nbOperations++;
 				temp=number[i];
 				number[i]=number[j];
 				number[j]=temp;
 			}
 		}
+		stats.nbComparisons++;
+
 		temp=number[pivot];
 		number[pivot]=number[j];
 		number[j]=temp;
@@ -352,9 +407,100 @@ T_elt * quickSort(T_elt * number,int first,int last){
 	return number;
 }
 
+void heapSortTest(){
+	int i, j, aux=0;
+
+	T_elt vec[MAX_ELT] = {0};
+	
+	printf("n,ncomp,noper\n");
+	
+	for(i=MAX_ELT/100;i<MAX_ELT;i+=MAX_ELT/100){
+		for(j=0;j<i;j++){
+			vec[j] = rand()%1000;
+		}
+		
+		heapSort(vec, i);
+		
+		for(j = aux;j < i;j += MAX_ELT/100){
+			printf("%d,%d,%d\n", i, stats.nbComparisons, stats.nbOperations);
+			aux = i;
+			stats.nbComparisons = 0;
+			stats.nbOperations = 0;
+				
+		}
+	}
+	for(j=0;j<i;j++){
+		vec[j] = rand()%1000;
+	}
+	
+	heapSort(vec, i);
+	printf("%d,%d,%d\n", i, stats.nbComparisons, stats.nbOperations);
+}
+
+void quickSortTest(){
+	int i, j, aux=0;
+
+	T_elt vec[MAX_ELT] = {0};
+	
+	printf("n,ncomp,noper\n");
+	
+	for(i=MAX_ELT/100;i<MAX_ELT;i+=MAX_ELT/100){
+		for(j=0;j<i;j++){
+			vec[j] = rand()%1000;
+		}
+		
+		quickSort(vec, 0, i);
+		
+		for(j = aux;j < i;j += MAX_ELT/100){
+			printf("%d,%d,%d\n", i, stats.nbComparisons, stats.nbOperations);
+			aux = i;
+			stats.nbComparisons = 0;
+			stats.nbOperations = 0;
+				
+		}
+	}
+	for(j=0;j<i;j++){
+		vec[j] = rand()%1000;
+	}
+	
+	quickSort(vec, 0, i);
+	printf("%d,%d,%d\n", i, stats.nbComparisons, stats.nbOperations);
+}
+
+void mergeSortTest(){
+	int i, j, aux=0;
+
+	T_elt vec[MAX_ELT] = {0};
+	
+	printf("n,ncomp,noper\n");
+	
+	for(i=MAX_ELT/100;i<MAX_ELT;i+=MAX_ELT/100){
+		for(j=0;j<i;j++){
+			vec[j] = rand()%1000;
+		}
+		
+		mergeSort(vec, 0, i);
+		
+		for(j = aux;j < i;j += MAX_ELT/100){
+			printf("%d,%d,%d\n", i, stats.nbComparisons, stats.nbOperations);
+			aux = i;
+			stats.nbComparisons = 0;
+			stats.nbOperations = 0;
+				
+		}
+	}
+	for(j=0;j<i;j++){
+		vec[j] = rand()%1000;
+	}
+	
+	mergeSort(vec, 0, i);
+	printf("%d,%d,%d\n", i, stats.nbComparisons, stats.nbOperations);
+}
+
 void merge(T_elt * arr, int l, int m, int r)
 {
     int i, j, k;
+	stats.nbOperations+=2;
     int n1 = m - l + 1;
     int n2 = r - m;
  
@@ -362,50 +508,71 @@ void merge(T_elt * arr, int l, int m, int r)
     int L[n1], R[n2];
  
     /* Copy data to temp arrays L[] and R[] */
-    for (i = 0; i < n1; i++)
-        L[i] = arr[l + i];
-    for (j = 0; j < n2; j++)
-        R[j] = arr[m + 1 + j];
+    for (i = 0; i < n1; i++){
+		stats.nbComparisons++;
+		L[i] = arr[l + i];
+		stats.nbOperations++;
+	}
+    for (j = 0; j < n2; j++){
+		stats.nbComparisons++;
+		R[j] = arr[m + 1 + j];
+		stats.nbOperations++;
+	}
  
     /* Merge the temp arrays back into arr[l..r]*/
+	stats.nbOperations++;
     i = 0; // Initial index of first subarray
     j = 0; // Initial index of second subarray
     k = l; // Initial index of merged subarray
-    while (i < n1 && j < n2) {
+	while (i < n1 && j < n2) {
+		stats.nbComparisons++;
+		stats.nbComparisons++;
         if (L[i] <= R[j]) {
+			stats.nbOperations+=2;
             arr[k] = L[i];
             i++;
         }
         else {
+			stats.nbOperations+=2;
             arr[k] = R[j];
             j++;
         }
+		stats.nbOperations++;
         k++;
     }
+	stats.nbComparisons++;
  
     /* Copy the remaining elements of L[], if there
     are any */
     while (i < n1) {
+		stats.nbComparisons++;
+		stats.nbOperations+=3;
         arr[k] = L[i];
         i++;
         k++;
     }
+	stats.nbComparisons++;
 	
     /* Copy the remaining elements of R[], if there
     are any */
     while (j < n2) {
+		stats.nbComparisons++;
+		stats.nbOperations+=3;
         arr[k] = R[j];
         j++;
         k++;
     }
+	stats.nbComparisons++;
 }
  
 /* l is for left index and r is right index of the
 sub-array of arr to be sorted */
 T_elt * mergeSort(T_elt * arr, int l, int r){
-    if (l < r) {
+    stats.nbComparisons++;
+	if (l < r) {
         // Same as (l+r)/2, but avoids overflow for
         // large l and h
+		stats.nbOperations++;
         int m = l + (r - l) / 2;
  
         // Sort first and second halves
