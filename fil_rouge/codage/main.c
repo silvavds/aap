@@ -202,7 +202,7 @@ int main(int argc, char ** argv){
 				//printf("[%c] [%s] \n", caracteres[i].caractere, caracteres[i].bincode, valid2);
 			}
 	
-			printf("\'%c\' :%4d |%5d | %s \n", i, encoding[i], heap.data[i], caracteres[j].bincode);
+			printf("\'%c\' :%4d |%5d | %s \n", i, heap.data[i], encoding[i], caracteres[j].bincode);
 		}
 	}
 	printf("\n");
@@ -222,7 +222,7 @@ int main(int argc, char ** argv){
 	
 	printf("total normal: %d \n", total_normal);	
 	printf("total compressed: %d \n", total);
-	printf("ratio: %5.2f %% \n", 100*(total/(double)total_normal));
+	printf("ratio: %5.2f %% \n\n", 100*(total/(double)total_normal));
 
 
 	print_huffman(heap, huffman, (heap.internal+127), heap.data);
