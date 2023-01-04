@@ -2,7 +2,6 @@
 #include <string.h>
 #include <assert.h>
 #include <math.h> 
-// ceil, floor : #include <math.h>
 
 #include "test_utils.h"
 #include "traces.h" 
@@ -79,7 +78,7 @@ void runTimeTests(){
 		T_elt * randMerge = (T_elt*)malloc(sz*sizeof(T_elt));
 		int num;
 		for(int i=0;i<sz;i++){
-			num=1+rand()%100;   //Generate number between 0 to 99
+			num=1+rand()%100;
 			randHeap[i]=num;
 			randQuick[i]=num;
 			randMerge[i]=num;
@@ -105,43 +104,6 @@ void runTimeTests(){
 
 int main(void) {
 	quickSortTest();
-
-	// int ex1[] = { 18, 15, 11, 10, 15, 6, 1, 7, 4, 9};   // 10
-	// int ex2[] = { 18, 16, 11, 10, 15, 6, 1, 7, 4, 9, 3}; // 11
-	// int ex3[] = { 3, 1, 8, 5, 9, 6, 11, 7, 4, 12}; // 10
-	// int ex4[] = { 7, 15, 1, 9, 15, 10, 11, 4, 18, 6 }; //10 
-	// int ex5[] = { 7, 15, 1, 9, 15, 10, 11, 4, 18, 6 }; //10 
-	// int ex6[] = { 7, 15, 1, 9, 15, 10, 11, 4, 18, 6 }; //10 
-	
-	// T_heap * maximier;
-	// T_elt e1;
-
-	// maximier = initHeap(ex4, 10);
-	// buildHeapV1(maximier); 
-	// showHeap(maximier);
-	
-	// free(maximier);
-	// maximier = initHeap(ex4, 10);
-	// buildHeapV2(maximier);
-	// showHeap(maximier);
-
-	// T_elt * sorted = heapSort(ex4,10);
-	// for(int i=0;i<10;i++){
-	// 	printf("%d ",sorted[i]);
-	// }
-	// printf("\n");
-
-	// T_elt * sorted2 = quickSort(ex5,0,9);
-	// for(int i=0;i<10;i++){
-	// 	printf("%d ",sorted2[i]);
-	// }
-	// printf("\n");
-
-	// T_elt * sorted3 = mergeSort(ex6,0,9);
-	// for(int i=0;i<10;i++){
-	// 	printf("%d ",sorted3[i]);
-	// }
-	// printf("\n");
 }
 
 
@@ -370,24 +332,20 @@ T_elt * quickSort(T_elt * number,int first,int last){
 		pivot=((rand() % (last - first + 1)) + first);
 		i=first;
 		j=last;
-
 		while(i<j){
 			stats.nbComparisons++;
-			
 			while(number[i]<=number[pivot]&&i<last){
 				stats.nbOperations++;
 				i++;
 				stats.nbComparisons++;
 			}
 			stats.nbComparisons++;
-			
 			stats.nbComparisons++;
 			while(number[j]>number[pivot]){
 				stats.nbOperations++;
 				j--;
 				stats.nbComparisons++;
 			}
-
 			stats.nbComparisons++;
 			if(i<j){
 				stats.nbOperations++;
@@ -397,7 +355,6 @@ T_elt * quickSort(T_elt * number,int first,int last){
 			}
 		}
 		stats.nbComparisons++;
-
 		temp=number[pivot];
 		number[pivot]=number[j];
 		number[j]=temp;
@@ -504,10 +461,8 @@ void merge(T_elt * arr, int l, int m, int r)
     int n1 = m - l + 1;
     int n2 = r - m;
  
-    /* create temp arrays */
     int L[n1], R[n2];
  
-    /* Copy data to temp arrays L[] and R[] */
     for (i = 0; i < n1; i++){
 		stats.nbComparisons++;
 		L[i] = arr[l + i];
@@ -519,11 +474,10 @@ void merge(T_elt * arr, int l, int m, int r)
 		stats.nbOperations++;
 	}
  
-    /* Merge the temp arrays back into arr[l..r]*/
 	stats.nbOperations++;
-    i = 0; // Initial index of first subarray
-    j = 0; // Initial index of second subarray
-    k = l; // Initial index of merged subarray
+    i = 0; 
+    j = 0; 
+    k = l; 
 	while (i < n1 && j < n2) {
 		stats.nbComparisons++;
 		stats.nbComparisons++;
@@ -542,8 +496,6 @@ void merge(T_elt * arr, int l, int m, int r)
     }
 	stats.nbComparisons++;
  
-    /* Copy the remaining elements of L[], if there
-    are any */
     while (i < n1) {
 		stats.nbComparisons++;
 		stats.nbOperations+=3;
@@ -553,8 +505,6 @@ void merge(T_elt * arr, int l, int m, int r)
     }
 	stats.nbComparisons++;
 	
-    /* Copy the remaining elements of R[], if there
-    are any */
     while (j < n2) {
 		stats.nbComparisons++;
 		stats.nbOperations+=3;
@@ -565,20 +515,13 @@ void merge(T_elt * arr, int l, int m, int r)
 	stats.nbComparisons++;
 }
  
-/* l is for left index and r is right index of the
-sub-array of arr to be sorted */
 T_elt * mergeSort(T_elt * arr, int l, int r){
     stats.nbComparisons++;
 	if (l < r) {
-        // Same as (l+r)/2, but avoids overflow for
-        // large l and h
 		stats.nbOperations++;
         int m = l + (r - l) / 2;
- 
-        // Sort first and second halves
         mergeSort(arr, l, m);
         mergeSort(arr, m + 1, r);
- 
         merge(arr, l, m, r);
     }
 	return arr;

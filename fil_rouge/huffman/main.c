@@ -79,8 +79,6 @@ charFreq * table_from_num_of_bits(charFreq * caracteres, int* num_of_encoding){
 		if(caracteres[i].numofbits!=0){
 			(*num_of_encoding)++;
 			caracteres[i].bincode = bin(last,caracteres[i].numofbits);
-			//printf("%s %c%d\t",caracteres[i].bincode, caracteres[i].caractere,caracteres[i].numofbits);
-			//printf("(%d,%d) %c%d\t",last, caracteres[i].numofbits,caracteres[i].caractere,caracteres[i].numofbits);
 			last++;
 			last = last<<(caracteres[i+1].numofbits-caracteres[i].numofbits);
 		}
@@ -98,8 +96,6 @@ charFreq * print_table_from_num_of_bits(charFreq * caracteres, char* final_resul
 	sprintf(final_result,"%d\n",numofencoding);
 	for(int i=0;i<MAX_CHARS;i++){
 	 	if(caracteres[i].numofbits!=0){
-	 		//printf("%d\n",caracteres[i].caractere);
-			//printf("%c", caracteres[i].numofbits+32);
 			if(VERBOSE){
 				printf("%c%c", caracteres[i].caractere,caracteres[i].numofbits+32);
 			}
@@ -169,7 +165,6 @@ void compress(char * str, FILE *fp){
 		currentC = str[i];
 		for(j=0;j<MAX_CHARS;j++){
 			if(newChar[j].caractere==currentC){
-				//printf("%s",newChar[j].bincode);
 				sprintf(final_result+strlen(final_result),"%s",newChar[j].bincode);
 			}
 		}
@@ -281,9 +276,7 @@ int main(int argc, char ** argv){
 		FILE *fp2 = fopen(argv[2], "w");
 		compress(input,fp2);
 		fclose(fp2);
-		//compress(argv[1]);
 	}else if(argc==2){
-		//printf("Decompress\n");
 		FILE *fp = fopen(argv[1], "r");
 		char* input = (char*)calloc(MAX_FILE_SIZE,sizeof(char));
 		char ch;
@@ -294,7 +287,6 @@ int main(int argc, char ** argv){
 			// If it is EOF stop reading.
 		} while (ch != EOF);
 		input[strlen(input)-1]='\0';
-		//printf("String read: %s\n", input);
 		fclose(fp);
 		decompress(input);
 	}
@@ -323,8 +315,6 @@ char * read_from_stdin(){
 	long file_size = INIT_SIZE;
 	
 	char * str = (char *)malloc(sizeof(char) * file_size);
-	
-	//fread(str, file_size, sizeof(char), stdin);
 
 	int index = 0;
 	str[index] = fgetc(stdin);
